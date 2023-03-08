@@ -1,0 +1,12 @@
+.headerContainer{
+    @apply justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8;
+}
+
+.appBarMenu{
+    @apply flex items-center justify-between py-3 md:py-5 md:block;
+}
+
+.burgerMenu{
+    @apply p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border;
+}
+
