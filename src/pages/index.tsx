@@ -1,13 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import { GetServerSideProps } from "next";
 import { wrapper } from "@/redux/store";
-import { getFilms } from "@/utils/api";
-import { setFilms } from "@/redux/slices/films";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
