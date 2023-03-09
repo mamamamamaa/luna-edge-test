@@ -13,8 +13,10 @@ export const useFilms = () => {
   const totalResults = useAppSelector(
     (state: RootState) => state.films.totalResults
   );
+  const error = useAppSelector((state: RootState) => state.films.error);
 
   return {
+    error,
     films,
     savedFilms,
     totalResults,
