@@ -1,0 +1,39 @@
+.cardContainer{
+    @apply flex flex-col md:flex-row justify-center items-center;
+}
+
+.imageContainer{
+    @apply md:w-1/2 p-4;
+}
+
+.infoContainer{
+    @apply md:w-1/2 p-4;
+}
+
+.extraInfoContainer{
+    @apply mb-4
+}
+
+.ratingContainer{
+    @apply mb-4 flex;
+}
+
+.title{
+    @apply text-4xl font-bold mb-2;
+}
+
+.plot{
+    @apply text-gray-600 text-lg mb-4 text-xl;
+}
+
+.subtitle{
+    @apply font-bold inline-block mr-2 text-lg;
+}
+
+.subtitleValue{
+    @apply inline-block text-lg;
+}
+
+.ratingList{
+    @apply inline-block list-disc ml-4 text-lg;
+}

@@ -22,7 +22,7 @@ export const CardList: FC = () => {
         {films.length > 0 &&
           films.map((film) => (
             <li key={film.imdbID}>
-              <Link href={`/search/${film.imdbID}`}>
+              <Link href={`/details/${film.imdbID}`}>
                 <FilmCard card={film} />
               </Link>
             </li>
