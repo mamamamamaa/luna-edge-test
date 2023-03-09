@@ -9,8 +9,8 @@ import { toast, Toaster } from "react-hot-toast";
 import { useFilms } from "@/redux/hooks";
 
 export const Header: FC = () => {
-  const [navbar, setNavbar] = useState<boolean>(false);
   const { error } = useFilms();
+  const [navbar, setNavbar] = useState<boolean>(false);
 
   const handleOpen = () => setNavbar((prevState) => !prevState);
 
