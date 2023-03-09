@@ -54,12 +54,10 @@ export const filmsSlice = createSlice({
       state.error = null;
       state.currentFilm = action.payload;
     },
-    setSave(state, action: PayloadAction<{ imdbID: string }>) {
+    setSave(state, action: PayloadAction<Film | null>) {
       state.error = null;
 
-      const { imdbID } = action.payload;
-      const { data } = state;
-      const savedFilm = data && findSavedFilm(imdbID, data);
+      const savedFilm = action.payload;
 
       if (savedFilm) {
         state.savedFilms = [...state.savedFilms, savedFilm];

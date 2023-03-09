@@ -1,4 +1,7 @@
 import { FC } from "react";
+
+import { useAppDispatch } from "@/redux/hooks";
+import { setSave } from "@/redux/slices/films";
 import { Rating, ResponseFilmById } from "@/utils/api/types";
 
 import style from "./DetailsCard.module.css";
@@ -8,8 +11,20 @@ interface Props {
 }
 
 export const DetailsCard: FC<Props> = ({ cardInfo }) => {
-  const { Poster, Title, Plot, Director, Actors, Genre, Year, Ratings } =
-    cardInfo;
+  const {
+    Poster,
+    Title,
+    Plot,
+    Director,
+    Actors,
+    Genre,
+    Year,
+    Ratings,
+    imdbID,
+    Type,
+  } = cardInfo;
+
+  const dispatch = useAppDispatch();
 
   const extraInfo = [
     { title: "Director", value: Director },
@@ -18,6 +33,8 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
     { title: "Year", value: Year },
   ];
 
+  const handleSave = () =>
+    dispatch(setSave({ Title, Year, imdbID, Type, Poster }));
   return (
     <>
       <div className={style.cardContainer}>
@@ -27,8 +44,8 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
         <div className={style.infoContainer}>
           <h1 className={style.title}>{Title}</h1>
           <p className={style.plot}>{Plot}</p>
-          {extraInfo.map(({ value, title }) => (
-            <div className={style.extraInfoContainer}>
+          {extraInfo.map(({ value, title }, idx) => (
+            <div className={style.extraInfoContainer} key={idx}>
               <p className={style.subtitle}>{title}:</p>
               <p className={style.subtitleValue}>{value}</p>
             </div>
@@ -43,6 +60,9 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
               ))}
             </ul>
           </div>
+          <button type="button" onClick={handleSave}>
+            Save to your collection
+          </button>
         </div>
       </div>
     </>
