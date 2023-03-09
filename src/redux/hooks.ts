@@ -7,6 +7,9 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useFilms = () => {
   const films = useAppSelector((state: RootState) => state.films.data);
+  const currentFilm = useAppSelector(
+    (state: RootState) => state.films.currentFilm
+  );
   const savedFilms = useAppSelector(
     (state: RootState) => state.films.savedFilms
   );
@@ -22,5 +25,6 @@ export const useFilms = () => {
     savedFilms,
     page,
     maxPage,
+    currentFilm,
   };
 };
