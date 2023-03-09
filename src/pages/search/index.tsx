@@ -1,14 +1,12 @@
-import { FC } from "react";
-import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { Searchbar } from "@/components/Searchbar/Searchbar";
 import { SearchPageHeading } from "@/components/SearchPageHeading/SearchPageHeading";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { wrapper } from "@/redux/store";
 import { getFilms } from "@/utils/api";
 import { setError, setFilms } from "@/redux/slices/films";
 import { CardList } from "@/components/CardList/CardList";
 
-const Search: FC = () => {
+const Search: NextPage = () => {
   return (
     <div className="flex flex-col gap-14">
       <SearchPageHeading />

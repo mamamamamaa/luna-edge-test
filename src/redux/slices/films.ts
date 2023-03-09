@@ -6,7 +6,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
-import { Film, ResponseFilms } from "@/utils/api/types";
+import { Film, ResponseFilmById, ResponseFilms } from "@/utils/api/types";
 import { paginateFilms, searchFilms } from "@/redux/operaions/films";
 import { findSavedFilm } from "@/utils/findSavedFilm";
 
@@ -23,6 +23,7 @@ export interface Films {
   query: string;
   page: number;
   maxPage: number;
+  currentFilm: ResponseFilmById | null;
 }
 
 const initialState: Films = {
@@ -32,6 +33,7 @@ const initialState: Films = {
   savedFilms: [],
   error: null,
   isLoading: false,
+  currentFilm: null,
   query: BASE_QUERY,
 };
 
@@ -47,6 +49,10 @@ export const filmsSlice = createSlice({
         Number(action.payload.totalResults) / PAGE_LIMIT
       );
       state.page += 1;
+    },
+    setFilmById(state, action: PayloadAction<ResponseFilmById>) {
+      state.error = null;
+      state.currentFilm = action.payload;
     },
     setSave(state, action: PayloadAction<{ imdbID: string }>) {
       state.error = null;
@@ -83,11 +89,13 @@ export const filmsSlice = createSlice({
         paginateFilms.fulfilled,
         (state, action: PayloadAction<ResponseFilms | undefined>) => {
           state.isLoading = false;
-          if (action.payload) {
+          if (action.payload && action.payload.Search) {
             state.data = [...state.data, ...action.payload.Search];
             state.maxPage = Math.ceil(
               Number(action.payload.totalResults) / PAGE_LIMIT
             );
+          } else {
+            state.error = "Movies for this query are over";
           }
         }
       )
@@ -95,11 +103,13 @@ export const filmsSlice = createSlice({
         searchFilms.fulfilled,
         (state, action: PayloadAction<ResponseFilms | undefined>) => {
           state.isLoading = false;
-          if (action.payload) {
+          if (action.payload && action.payload.Search) {
             state.data = action.payload.Search;
             state.maxPage = Math.ceil(
               Number(action.payload.totalResults) / PAGE_LIMIT
             );
+          } else {
+            state.error = "Movie not found";
           }
         }
       )
@@ -119,6 +129,6 @@ export const filmsSlice = createSlice({
       ),
 });
 
-export const { setFilms, setSave, setPage, setQuery, setError } =
+export const { setFilms, setSave, setFilmById, setPage, setQuery, setError } =
   filmsSlice.actions;
 export const FilmsReducer = filmsSlice.reducer;

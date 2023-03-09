@@ -1,4 +1,6 @@
-export default function Home() {
+import { NextPage } from "next";
+
+const Home: NextPage = () => {
   return (
     <>
       <section className="py-20 text-center">
@@ -7,4 +9,6 @@ export default function Home() {
       </section>
     </>
   );
-}
+};
+
+export default Home;

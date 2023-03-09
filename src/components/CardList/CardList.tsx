@@ -4,6 +4,7 @@ import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { paginateFilms } from "@/redux/operaions/films";
 
 import style from "./CardList.module.css";
+import Link from "next/link";
 
 export const CardList: FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,9 @@ export const CardList: FC = () => {
         {films.length > 0 &&
           films.map((film) => (
             <li key={film.imdbID}>
-              <FilmCard card={film} />
+              <Link href={`/search/${film.imdbID}`}>
+                <FilmCard card={film} />
+              </Link>
             </li>
           ))}
       </ul>
