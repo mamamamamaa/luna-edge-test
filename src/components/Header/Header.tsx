@@ -12,7 +12,7 @@ export const Header: FC = () => {
   const handleOpen = () => setNavbar((prevState) => !prevState);
 
   return (
-    <div className="w-full bg-white shadow">
+    <header className="w-full bg-white shadow">
       <div className={style.headerContainer}>
         <div>
           <div className={style.appBarMenu}>
@@ -24,6 +24,6 @@ export const Header: FC = () => {
           <RouteLinks isNavbar={navbar} />
         </div>
       </div>
-    </div>
+    </header>
   );
 };

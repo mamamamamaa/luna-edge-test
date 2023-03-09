@@ -5,7 +5,14 @@ import { setError, setFilms } from "@/redux/slices/films";
 import { getFilms } from "@/utils/api";
 
 export default function Home() {
-  return <>Home</>;
+  return (
+    <>
+      <section className="py-20 text-center">
+        <h1 className="text-5xl font-bold mb-2">Welcome to My Movie Site</h1>
+        <p className="text-lg">Discover the latest and greatest movies here.</p>
+      </section>
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps =
