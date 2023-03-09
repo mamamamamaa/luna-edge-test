@@ -10,15 +10,17 @@ export const useFilms = () => {
   const savedFilms = useAppSelector(
     (state: RootState) => state.films.savedFilms
   );
-  const totalResults = useAppSelector(
-    (state: RootState) => state.films.totalResults
-  );
+  const page = useAppSelector((state: RootState) => state.films.page);
+  const maxPage = useAppSelector((state: RootState) => state.films.maxPage);
   const error = useAppSelector((state: RootState) => state.films.error);
+  const isLoading = useAppSelector((state: RootState) => state.films.isLoading);
 
   return {
     error,
+    isLoading,
     films,
     savedFilms,
-    totalResults,
+    page,
+    maxPage,
   };
 };

@@ -1,30 +1,34 @@
+import { HYDRATE } from "next-redux-wrapper";
 import {
   AnyAction,
   createSlice,
   isAnyOf,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { Film, ResponseFilms } from "@/utils/api/types";
-import { HYDRATE } from "next-redux-wrapper";
-import { findSavedFilm } from "@/utils/findSavedFilm";
-import { paginateFilms, searchFilms } from "@/redux/operaions/films";
 
-const BASE_QUERY = "Fury";
+import { Film, ResponseFilms } from "@/utils/api/types";
+import { paginateFilms, searchFilms } from "@/redux/operaions/films";
+import { findSavedFilm } from "@/utils/findSavedFilm";
+
+const BASE_QUERY = "the act";
+const PAGE_LIMIT = 10;
 
 const extraActions = [paginateFilms, searchFilms];
 
 export interface Films {
   data: Film[] | [];
   savedFilms: Film[] | [];
-  totalResults: number | null;
   error: string | null;
   isLoading: boolean;
   query: string;
+  page: number;
+  maxPage: number;
 }
 
 const initialState: Films = {
   data: [],
-  totalResults: null,
+  page: 1,
+  maxPage: 1,
   savedFilms: [],
   error: null,
   isLoading: false,
@@ -39,7 +43,10 @@ export const filmsSlice = createSlice({
       state.error = null;
 
       state.data = action.payload.Search;
-      state.totalResults = Number(action.payload.totalResults);
+      state.maxPage = Math.ceil(
+        Number(action.payload.totalResults) / PAGE_LIMIT
+      );
+      state.page += 1;
     },
     setSave(state, action: PayloadAction<{ imdbID: string }>) {
       state.error = null;
@@ -60,6 +67,9 @@ export const filmsSlice = createSlice({
     setQuery(state, action: PayloadAction<string>) {
       state.query = action.payload;
     },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -75,7 +85,9 @@ export const filmsSlice = createSlice({
           state.isLoading = false;
           if (action.payload) {
             state.data = [...state.data, ...action.payload.Search];
-            state.totalResults = Number(action.payload.totalResults);
+            state.maxPage = Math.ceil(
+              Number(action.payload.totalResults) / PAGE_LIMIT
+            );
           }
         }
       )
@@ -85,7 +97,9 @@ export const filmsSlice = createSlice({
           state.isLoading = false;
           if (action.payload) {
             state.data = action.payload.Search;
-            state.totalResults = Number(action.payload.totalResults);
+            state.maxPage = Math.ceil(
+              Number(action.payload.totalResults) / PAGE_LIMIT
+            );
           }
         }
       )
@@ -105,5 +119,6 @@ export const filmsSlice = createSlice({
       ),
 });
 
-export const { setFilms, setSave, setQuery, setError } = filmsSlice.actions;
+export const { setFilms, setSave, setPage, setQuery, setError } =
+  filmsSlice.actions;
 export const FilmsReducer = filmsSlice.reducer;

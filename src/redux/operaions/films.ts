@@ -1,20 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance } from "@/utils/api";
 import { ResponseFilms } from "@/utils/api/types";
-import { RootState, RootStore } from "@/redux/store";
-import { setQuery } from "@/redux/slices/films";
+import { RootState } from "@/redux/store";
+import { setPage, setQuery } from "@/redux/slices/films";
+import axios from "axios";
+import getConfig from "next/config";
 
-const { API_KEY } = process.env;
+const { publicRuntimeConfig } = getConfig();
+const { BASE_URL: URL, API_KEY: KEY } = publicRuntimeConfig;
 
 export const paginateFilms = createAsyncThunk(
   "films/paginate",
   async (page: number = 1, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     const { films } = thunkAPI.getState() as RootState;
     const { query } = films as { query: string };
 
+    dispatch(setPage(page + 1));
+
     try {
-      const { data } = await instance.get<ResponseFilms>(
-        `?apikey=${API_KEY}&s=${query}&page=${page}`
+      const { data } = await axios.get<ResponseFilms>(
+        `${URL}?apikey=${KEY}&s=${query}&page=${page}`
       );
       return data;
     } catch (err) {
@@ -32,8 +37,8 @@ export const searchFilms = createAsyncThunk(
     dispatch(setQuery(search));
 
     try {
-      const { data } = await instance.get<ResponseFilms>(
-        `?apikey=${API_KEY}&s=${search}`
+      const { data } = await axios.get<ResponseFilms>(
+        `${URL}?apikey=${KEY}&s=${search}`
       );
       return data;
     } catch (err) {
