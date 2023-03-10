@@ -1,38 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Test task
 
-## Getting Started
+Test task in the company Luna Edge for the position of junior front-end developer.
 
-First, run the development server:
+## Usage
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+In the about section, you can follow the [link](https://luna-edge-test-alpha.vercel.app/) and test the application, but due to the fact that the OMDB API service provides a link to the API with the HTTP protocol, the browser does not allow the client to send a request to the server. Therefore, pagination on hosting does not work, but you can test it locally. To do this, follow these steps:
+
+Register on the OMDB service, get your API key and in the same place you can get a link to the BASE URL.
+
+### In terminal:
+
+* Clone Repo:
+```
+git clone https://github.com/mamamamamaa/luna-edge-test.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Install packages:
 
-You can start editing the page by modifying `pages/search.tsx`. The page auto-updates as you edit the file.
+```
+// with npm
+npm i 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+// with yarn
+yarn add
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* Create a ".env" file and then add environment variables like in [".env.example"](https://github.com/mamamamamaa/luna-edge-test/blob/main/.env.example) file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+* Run application:
+```
+// with npm
+npm run dev
 
-## Learn More
+// with yarn
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+* And finaly go to [http://localhost:3000](http://localhost:3000) in your browser. ^_^
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
