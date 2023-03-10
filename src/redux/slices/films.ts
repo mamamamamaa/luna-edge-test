@@ -1,18 +1,18 @@
-import { HYDRATE } from "next-redux-wrapper";
 import {
   AnyAction,
   createSlice,
   isAnyOf,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
+import { paginateFilms } from "@/redux/operaions/films";
 import { Film, ResponseFilmById, ResponseFilms } from "@/utils/api/types";
-import { paginateFilms, searchFilms } from "@/redux/operaions/films";
 
 const BASE_QUERY = "the act";
 const PAGE_LIMIT = 10;
 
-const extraActions = [paginateFilms, searchFilms];
+const extraActions = [paginateFilms];
 
 export interface Films {
   data: Film[] | [];
@@ -47,7 +47,7 @@ export const filmsSlice = createSlice({
       state.maxPage = Math.ceil(
         Number(action.payload.totalResults) / PAGE_LIMIT
       );
-      state.page += 1;
+      state.page = 2;
     },
     setFilmById(state, action: PayloadAction<ResponseFilmById>) {
       state.error = null;
@@ -99,22 +99,9 @@ export const filmsSlice = createSlice({
             state.maxPage = Math.ceil(
               Number(action.payload.totalResults) / PAGE_LIMIT
             );
+            state.page += 1;
           } else {
             state.error = "Movies for this query are over";
-          }
-        }
-      )
-      .addCase(
-        searchFilms.fulfilled,
-        (state, action: PayloadAction<ResponseFilms | undefined>) => {
-          state.isLoading = false;
-          if (action.payload && action.payload.Search) {
-            state.data = action.payload.Search;
-            state.maxPage = Math.ceil(
-              Number(action.payload.totalResults) / PAGE_LIMIT
-            );
-          } else {
-            state.error = "Movie not found";
           }
         }
       )

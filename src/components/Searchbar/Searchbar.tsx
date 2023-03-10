@@ -1,13 +1,11 @@
 import { FormEvent } from "react";
+import { useRouter } from "next/router";
 import { BsSearch } from "react-icons/bs";
-
-import { useAppDispatch } from "@/redux/hooks";
-import { searchFilms } from "@/redux/operaions/films";
 
 import style from "./Searchbar.module.css";
 
 export const Searchbar = () => {
-  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,8 +13,7 @@ export const Searchbar = () => {
     const formData = new FormData(e.currentTarget);
     const query = String(formData.get("query"));
 
-    // @ts-ignore
-    dispatch(searchFilms(query));
+    router.push(`/search?searchQuery=${query}`);
   };
 
   return (

@@ -1,0 +1,19 @@
+.cardContainer{
+    @apply max-w-sm w-[300px] h-[500px] rounded overflow-hidden shadow-lg cursor-pointer hover:shadow-xl;
+}
+
+.image{
+    @apply w-[300px] h-[380px];
+}
+
+.infoContainer{
+    @apply px-6 py-4;
+}
+
+.title{
+    @apply font-bold text-xl mb-2;
+}
+
+.year{
+    @apply text-gray-700 text-base;
+}

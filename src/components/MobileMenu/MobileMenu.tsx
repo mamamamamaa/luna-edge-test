@@ -1,6 +1,7 @@
 import { FC, MouseEventHandler } from "react";
-import style from "@/components/Header/Header.module.css";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
+
+import style from "@/components/Header/Header.module.css";
 
 interface Props {
   isNavbar: boolean;

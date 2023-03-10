@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import { BiArrowBack } from "react-icons/bi";
 import { FC, useMemo, useState } from "react";
 
 import { useAppDispatch, useFilms } from "@/redux/hooks";
@@ -26,6 +28,7 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
 
   const dispatch = useAppDispatch();
   const { savedFilms } = useFilms();
+  const router = useRouter();
 
   const isAlreadySave = useMemo(() => {
     return Boolean(savedFilms.find((saved) => saved.imdbID === imdbID));
@@ -40,6 +43,10 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
     { title: "Year", value: Year },
   ];
 
+  const toggleButtonText = isSaved
+    ? "Remove from saved"
+    : "Save to your collection";
+
   const handleSave = () => {
     isSaved
       ? dispatch(deleteFromSaved(imdbID))
@@ -48,9 +55,14 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
     setSaved((prevState) => !prevState);
   };
 
+  const handleBack = () => router.back();
+
   return (
     <>
       <div className={style.cardContainer}>
+        <button type="button" onClick={handleBack}>
+          <BiArrowBack size={30} />
+        </button>
         <div className={style.imageContainer}>
           <img className="w-full" src={Poster} alt={Title} />
         </div>
@@ -78,7 +90,7 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
             onClick={handleSave}
             className={style.toggleButton}
           >
-            {isSaved ? "Delete from saved" : "Save to your collection"}
+            {toggleButtonText}
           </button>
         </div>
       </div>

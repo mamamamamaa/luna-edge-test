@@ -1,6 +1,7 @@
-import style from "./Logo.module.css";
-import Link from "next/link";
 import { FC } from "react";
+import Link from "next/link";
+
+import style from "./Logo.module.css";
 
 export const Logo: FC = () => {
   return (

@@ -1,9 +1,10 @@
 import axios from "axios";
+
 import { ResponseFilmById, ResponseFilms } from "@/utils/api/types";
 
 const { BASE_URL: URL, API_KEY: KEY } = process.env;
 
-export const getFilms = async (search: string) => {
+export const getFilms = async (search: string, page: number) => {
   const { data } = await axios.get<ResponseFilms>(
     `${URL}?apikey=${KEY}&s=${search}`
   );

@@ -1,10 +1,12 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { wrapper } from "@/redux/store";
-import { Layout } from "@/components/Layout/Layout";
-import { ReactReduxContext } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+
 import Head from "next/head";
+import type { AppProps } from "next/app";
+
+import { wrapper } from "@/redux/store";
+import { ReactReduxContext } from "react-redux";
+import { Layout } from "@/components/Layout/Layout";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App({ Component, pageProps }: AppProps) {
   return (

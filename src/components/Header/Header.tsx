@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
-import { RouteLinks } from "@/components/RouteLinks/RouteLinks";
+import { useFilms } from "@/redux/hooks";
 import { Logo } from "@/components/Logo/Logo";
+import { RouteLinks } from "@/components/RouteLinks/RouteLinks";
 import { MobileMenu } from "@/components/MobileMenu/MobileMenu";
 
 import style from "./Header.module.css";
-import { toast, Toaster } from "react-hot-toast";
-import { useFilms } from "@/redux/hooks";
 
 export const Header: FC = () => {
   const { error } = useFilms();

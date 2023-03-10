@@ -10,6 +10,8 @@ export const CardList: FC = () => {
   const dispatch = useAppDispatch();
   const { films, page, maxPage, isLoading } = useFilms();
 
+  const loadMoreButtonText = isLoading ? "Loading..." : "Load more";
+
   const handleLoadMore = () => {
     if (page <= maxPage && !isLoading) {
       // @ts-ignore
@@ -25,7 +27,7 @@ export const CardList: FC = () => {
         disabled={isLoading}
         onClick={handleLoadMore}
       >
-        {isLoading ? "Loading..." : "Load more"}
+        {loadMoreButtonText}
       </button>
     </>
   );

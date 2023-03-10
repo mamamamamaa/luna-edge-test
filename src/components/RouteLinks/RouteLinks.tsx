@@ -1,6 +1,7 @@
 import { FC } from "react";
-import style from "./RouteLinks.module.css";
 import Link from "next/link";
+
+import style from "./RouteLinks.module.css";
 
 interface Props {
   isNavbar: boolean;

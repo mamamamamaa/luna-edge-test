@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+
 import { useFilms } from "@/redux/hooks";
 import { List } from "@/components/List/List";
 

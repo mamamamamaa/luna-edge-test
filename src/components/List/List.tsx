@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Link from "next/link";
 
-import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { Film } from "@/utils/api/types";
+import { Stub } from "@/components/Stub/Stub";
+import { FilmCard } from "@/components/FilmCard/FilmCard";
 
 import style from "./List.module.css";
-import { Stub } from "@/components/Stub/Stub";
 
 interface Props {
   films: Film[] | [];

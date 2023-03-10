@@ -1,7 +1,3 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { FilmsReducer } from "@/redux/slices/films";
-import { createWrapper } from "next-redux-wrapper";
-
 import {
   persistStore,
   persistReducer,
@@ -13,6 +9,10 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { createWrapper } from "next-redux-wrapper";
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+
+import { FilmsReducer } from "@/redux/slices/films";
 
 export function makeStore() {
   const isServer = typeof window === "undefined";
