@@ -1,0 +1,11 @@
+.notFoundContainer{
+    @apply flex items-center flex-col gap-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
+.notFoundHeader{
+    @apply text-gray-700 text-5xl font-bold;
+}
+
+.buttonBackText{
+    @apply text-3xl hover:text-gray-500;
+}

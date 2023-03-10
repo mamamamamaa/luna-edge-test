@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import { BiArrowBack } from "react-icons/bi";
 import { FC, useMemo, useState } from "react";
 
 import { useAppDispatch, useFilms } from "@/redux/hooks";
@@ -7,6 +5,7 @@ import { deleteFromSaved, setSave } from "@/redux/slices/films";
 import { Rating, ResponseFilmById } from "@/utils/api/types";
 
 import style from "./DetailsCard.module.css";
+import { ButtonBack } from "@/components/ButtonBack/ButtonBack";
 
 interface Props {
   cardInfo: ResponseFilmById;
@@ -28,7 +27,6 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
 
   const dispatch = useAppDispatch();
   const { savedFilms } = useFilms();
-  const router = useRouter();
 
   const isAlreadySave = useMemo(() => {
     return Boolean(savedFilms.find((saved) => saved.imdbID === imdbID));
@@ -55,14 +53,10 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
     setSaved((prevState) => !prevState);
   };
 
-  const handleBack = () => router.back();
-
   return (
     <>
       <div className={style.cardContainer}>
-        <button type="button" onClick={handleBack}>
-          <BiArrowBack size={30} />
-        </button>
+        <ButtonBack />
         <div className={style.imageContainer}>
           <img className="w-full" src={Poster} alt={Title} />
         </div>
