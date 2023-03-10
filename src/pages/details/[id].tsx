@@ -3,8 +3,8 @@ import { NextPage } from "next";
 import { getFilmById } from "@/utils/api";
 import { setError, setFilmById } from "@/redux/slices/films";
 import { useFilms } from "@/redux/hooks";
-import { Rating } from "@/utils/api/types";
 import { DetailsCard } from "@/components/DetailsCard/DetailsCard";
+import { Stub } from "@/components/Stub/Stub";
 
 const Details: NextPage = () => {
   const { currentFilm } = useFilms();
@@ -13,9 +13,7 @@ const Details: NextPage = () => {
       {currentFilm ? (
         <DetailsCard cardInfo={currentFilm} />
       ) : (
-        <p className="text-center text-5xl font-bold mb-2">
-          We can't find this film
-        </p>
+        <Stub message="We can't find this film" />
       )}
     </>
   );

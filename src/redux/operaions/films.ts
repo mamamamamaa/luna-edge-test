@@ -8,29 +8,29 @@ import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 const { BASE_URL: URL, API_KEY: KEY } = publicRuntimeConfig;
 
-export const paginateFilms = createAsyncThunk(
-  "films/paginate",
-  async (page: number = 1, thunkAPI) => {
-    const { dispatch } = thunkAPI;
-    const { films } = thunkAPI.getState() as RootState;
-    const { query } = films as { query: string };
+export const paginateFilms = createAsyncThunk<
+  ResponseFilms | undefined,
+  number
+>("films/paginate", async (page: number = 1, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+  const { films } = thunkAPI.getState() as RootState;
+  const { query } = films as { query: string };
 
-    dispatch(setPage(page + 1));
+  dispatch(setPage(page + 1));
 
-    try {
-      const { data } = await axios.get<ResponseFilms>(
-        `${URL}?apikey=${KEY}&s=${query}&page=${page}`
-      );
-      return data;
-    } catch (err) {
-      if (err instanceof Error) {
-        return thunkAPI.rejectWithValue(err.message);
-      }
+  try {
+    const { data } = await axios.get<ResponseFilms>(
+      `${URL}?apikey=${KEY}&s=${query}&page=${page}`
+    );
+    return data;
+  } catch (err) {
+    if (err instanceof Error) {
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
-);
+});
 
-export const searchFilms = createAsyncThunk(
+export const searchFilms = createAsyncThunk<ResponseFilms | undefined, string>(
   "films/search",
   async (search: string, thunkAPI) => {
     const { dispatch } = thunkAPI;

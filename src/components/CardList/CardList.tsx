@@ -1,10 +1,10 @@
 import { FC } from "react";
+
 import { useAppDispatch, useFilms } from "@/redux/hooks";
-import { FilmCard } from "@/components/FilmCard/FilmCard";
 import { paginateFilms } from "@/redux/operaions/films";
+import { List } from "@/components/List/List";
 
 import style from "./CardList.module.css";
-import Link from "next/link";
 
 export const CardList: FC = () => {
   const dispatch = useAppDispatch();
@@ -12,22 +12,14 @@ export const CardList: FC = () => {
 
   const handleLoadMore = () => {
     if (page <= maxPage && !isLoading) {
+      // @ts-ignore
       dispatch(paginateFilms(page));
     }
   };
 
   return (
     <>
-      <ul className={style.filmList}>
-        {films.length > 0 &&
-          films.map((film) => (
-            <li key={film.imdbID}>
-              <Link href={`/details/${film.imdbID}`}>
-                <FilmCard card={film} />
-              </Link>
-            </li>
-          ))}
-      </ul>
+      <List films={films} />
       <button
         className={style.loadMore}
         disabled={isLoading}

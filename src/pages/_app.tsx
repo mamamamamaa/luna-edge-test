@@ -4,6 +4,7 @@ import { wrapper } from "@/redux/store";
 import { Layout } from "@/components/Layout/Layout";
 import { ReactReduxContext } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import Head from "next/head";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,6 +13,10 @@ function App({ Component, pageProps }: AppProps) {
         // @ts-ignore
         <PersistGate persistor={store.__persistor}>
           <Layout>
+            <Head>
+              <title>Films</title>
+              <link rel="shortcut icon" href="/favicon.ico" />
+            </Head>
             <Component {...pageProps} />
           </Layout>
         </PersistGate>

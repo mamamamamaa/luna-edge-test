@@ -25,7 +25,7 @@ export function makeStore() {
   } else {
     const persistConfig = {
       key: "nextjs",
-      whitelist: ["savedFilms"], // make sure it does not clash with server keys
+      whitelist: ["savedFilms"],
       storage,
     };
 
@@ -46,6 +46,8 @@ export function makeStore() {
 
     //@ts-ignore
     store.__persistor = persistStore(store);
+    //documentation hack --> https://github.com/kirill-konshin/next-redux-wrapper#usage-with-redux-persist
+
     return store;
   }
 }

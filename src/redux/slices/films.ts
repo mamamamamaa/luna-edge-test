@@ -8,7 +8,6 @@ import {
 
 import { Film, ResponseFilmById, ResponseFilms } from "@/utils/api/types";
 import { paginateFilms, searchFilms } from "@/redux/operaions/films";
-import { findSavedFilm } from "@/utils/findSavedFilm";
 
 const BASE_QUERY = "the act";
 const PAGE_LIMIT = 10;
@@ -81,6 +80,7 @@ export const filmsSlice = createSlice({
         return {
           ...state,
           ...action.payload.films,
+          savedFilms: state.savedFilms,
         };
       })
       .addCase(
