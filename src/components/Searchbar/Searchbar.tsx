@@ -1,9 +1,10 @@
+import { FormEvent } from "react";
 import { BsSearch } from "react-icons/bs";
 
-import style from "./Searchbar.module.css";
-import { FormEvent } from "react";
-import { useAppDispatch, useFilms } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { searchFilms } from "@/redux/operaions/films";
+
+import style from "./Searchbar.module.css";
 
 export const Searchbar = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ export const Searchbar = () => {
     const formData = new FormData(e.currentTarget);
     const query = String(formData.get("query"));
 
+    // @ts-ignore
     dispatch(searchFilms(query));
   };
 

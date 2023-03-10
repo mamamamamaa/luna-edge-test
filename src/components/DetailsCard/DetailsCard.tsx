@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, useMemo, useState } from "react";
 
-import { useAppDispatch } from "@/redux/hooks";
-import { setSave } from "@/redux/slices/films";
+import { useAppDispatch, useFilms } from "@/redux/hooks";
+import { deleteFromSaved, setSave } from "@/redux/slices/films";
 import { Rating, ResponseFilmById } from "@/utils/api/types";
 
 import style from "./DetailsCard.module.css";
@@ -25,6 +25,13 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
   } = cardInfo;
 
   const dispatch = useAppDispatch();
+  const { savedFilms } = useFilms();
+
+  const isAlreadySave = useMemo(() => {
+    return Boolean(savedFilms.find((saved) => saved.imdbID === imdbID));
+  }, []);
+
+  const [isSaved, setSaved] = useState<boolean>(isAlreadySave);
 
   const extraInfo = [
     { title: "Director", value: Director },
@@ -33,8 +40,14 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
     { title: "Year", value: Year },
   ];
 
-  const handleSave = () =>
-    dispatch(setSave({ Title, Year, imdbID, Type, Poster }));
+  const handleSave = () => {
+    isSaved
+      ? dispatch(deleteFromSaved(imdbID))
+      : dispatch(setSave({ Title, Year, imdbID, Type, Poster }));
+
+    setSaved((prevState) => !prevState);
+  };
+
   return (
     <>
       <div className={style.cardContainer}>
@@ -60,8 +73,12 @@ export const DetailsCard: FC<Props> = ({ cardInfo }) => {
               ))}
             </ul>
           </div>
-          <button type="button" onClick={handleSave}>
-            Save to your collection
+          <button
+            type="button"
+            onClick={handleSave}
+            className={style.toggleButton}
+          >
+            {isSaved ? "Delete from saved" : "Save to your collection"}
           </button>
         </div>
       </div>

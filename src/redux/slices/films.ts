@@ -56,13 +56,20 @@ export const filmsSlice = createSlice({
     setSave(state, action: PayloadAction<Film | null>) {
       state.error = null;
 
-      const savedFilm = action.payload;
+      const filmToSave = action.payload;
+      const isAlreadySave = state.savedFilms.find(
+        ({ imdbID }) => imdbID === filmToSave?.imdbID
+      );
 
-      if (savedFilm) {
-        state.savedFilms = [...state.savedFilms, savedFilm];
+      if (filmToSave && !isAlreadySave) {
+        state.savedFilms = [...state.savedFilms, filmToSave];
       } else {
-        state.error = "We can't find this film";
+        state.error = "We can't find this film, or it's already saved";
       }
+    },
+    deleteFromSaved(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      state.savedFilms = state.savedFilms.filter(({ imdbID }) => imdbID !== id);
     },
     setError(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -127,6 +134,13 @@ export const filmsSlice = createSlice({
       ),
 });
 
-export const { setFilms, setSave, setFilmById, setPage, setQuery, setError } =
-  filmsSlice.actions;
+export const {
+  setFilms,
+  setSave,
+  setFilmById,
+  deleteFromSaved,
+  setPage,
+  setQuery,
+  setError,
+} = filmsSlice.actions;
 export const FilmsReducer = filmsSlice.reducer;
