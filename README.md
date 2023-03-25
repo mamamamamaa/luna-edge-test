@@ -35,6 +35,6 @@ npm run dev
 // with yarn
 yarn dev
 ```
-
+ 
 * And finaly go to [http://localhost:3000](http://localhost:3000) in your browser. ^_^
 
