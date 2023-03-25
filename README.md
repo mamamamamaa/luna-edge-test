@@ -9,7 +9,7 @@ In the about section, you can follow the [link](https://luna-edge-test-alpha.ver
 Register on the OMDB service, get your API key and in the same place you can get a link to the BASE URL.
 
 ### In terminal:
-
+ 
 * Clone Repo:
 ```
 git clone https://github.com/mamamamamaa/luna-edge-test.git
