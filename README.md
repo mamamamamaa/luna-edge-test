@@ -22,7 +22,7 @@ git clone https://github.com/mamamamamaa/luna-edge-test.git
 npm i 
 
 // with yarn
-yarn add
+yarn add   
 ```
 
 * Create a ".env" file and then add environment variables like in [".env.example"](https://github.com/mamamamamaa/luna-edge-test/blob/main/.env.example) file.
@@ -33,7 +33,7 @@ yarn add
 npm run dev
 
 // with yarn
-yarn dev
+yarn dev  
 ```
  
 * And finaly go to [http://localhost:3000](http://localhost:3000) in your browser. ^_^
